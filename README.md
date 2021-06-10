@@ -1,2 +1,2 @@
 # UniversityOfHelsinki-JavaProgramming
-Some problems from the Java Programming course
+Some problems from the Java Programming coursework
