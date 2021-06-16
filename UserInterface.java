@@ -25,17 +25,25 @@ public class UserInterface {
 
     public void start() {
         fileReader();
+        System.out.println("Commands:\n"
+                + "list - lists the recipes\n"
+                + "stop - stops the program\n"
+                + "find name - searches recipes by name\n"
+                + "find cooking time - searches recipes by cooking time\n"
+                + "find ingredient - searches recipes by ingredient");
         while (true) {
-            System.out.println("list - lists the recipes\n"
-                    + "stop - stops the program\n"
-                    + "find name - searches recipes by name");
+            System.out.println("Enter command: ");
             String command = scanner.nextLine();
             if (command.equals("list")) {
                 System.out.println("Recipes:");
                 recipeReader();
             } else if (command.equals("find name")) {
                 findName();
-            } else {
+            } else if (command.equals("find cooking time")) {
+                findTime();
+            }else if (command.equals("find ingredient")) {
+                findIngredient();
+            }    else {
                 break;
             }
         }
@@ -117,9 +125,27 @@ public class UserInterface {
         for (Recipe recipe : recipesReadFromFile) {
             if (recipe.getName().contains(searchedName)) {
                 System.out.println(recipe);
+                System.out.println();
+
             }
         }
+    }
 
+    public void findTime() {
+        System.out.println("Max cooking time: ");
+        int searchedTime = Integer.valueOf(scanner.nextLine());
+        System.out.println("Recipes:");
+        for (Recipe recipe : recipesReadFromFile) {
+            if (recipe.getCookingTime() <= (searchedTime)) {
+                System.out.println(recipe);
+                System.out.println();
+
+            }
+        }
+    }
+    
+    public void findIngredient(){
+        
     }
 
 }
