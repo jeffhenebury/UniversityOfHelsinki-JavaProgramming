@@ -26,12 +26,15 @@ public class UserInterface {
     public void start() {
         fileReader();
         while (true) {
-            System.out.println("Commands:\n"
-                    + "list - lists the recipes\n"
-                    + "stop - stops the program");
-            if (scanner.nextLine().equals("list")) {
+            System.out.println("list - lists the recipes\n"
+                    + "stop - stops the program\n"
+                    + "find name - searches recipes by name");
+            String command = scanner.nextLine();
+            if (command.equals("list")) {
                 System.out.println("Recipes:");
                 recipeReader();
+            } else if (command.equals("find name")) {
+                findName();
             } else {
                 break;
             }
@@ -105,4 +108,18 @@ public class UserInterface {
             System.out.println(recipeList);
         }
     }
+
+    public void findName() {
+        System.out.println("Searched word:");
+        String searchedName = scanner.nextLine();
+        System.out.println("Recipes:");
+
+        for (Recipe recipe : recipesReadFromFile) {
+            if (recipe.getName().contains(searchedName)) {
+                System.out.println(recipe);
+            }
+        }
+
+    }
+
 }
