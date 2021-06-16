@@ -41,10 +41,12 @@ public class UserInterface {
                 findName();
             } else if (command.equals("find cooking time")) {
                 findTime();
-            }else if (command.equals("find ingredient")) {
+            } else if (command.equals("find ingredient")) {
                 findIngredient();
-            }    else {
+            } else if (command.equals("stop")) {
                 break;
+            } else {
+                System.out.println("Invalid command, try again.");
             }
         }
 
@@ -143,9 +145,19 @@ public class UserInterface {
             }
         }
     }
-    
-    public void findIngredient(){
-        
+
+    public void findIngredient() {
+        System.out.println("Ingredient: ");
+        String searchedIngredient = scanner.nextLine();
+        System.out.println("Recipes:");
+        for (Recipe recipe : recipesReadFromFile) {
+            ArrayList<String> ingreds = recipe.getIngredients();
+            for (String individualIngredients : ingreds) {
+                if (individualIngredients.equals(searchedIngredient)) {
+                    System.out.println(recipe);
+                }
+            }
+        }
     }
 
 }
