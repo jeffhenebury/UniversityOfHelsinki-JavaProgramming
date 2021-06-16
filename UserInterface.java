@@ -24,14 +24,26 @@ public class UserInterface {
     }
 
     public void start() {
-        recipeReader();
+        fileReader();
+        while (true) {
+            System.out.println("Commands:\n"
+                    + "list - lists the recipes\n"
+                    + "stop - stops the program");
+            if (scanner.nextLine().equals("list")) {
+                System.out.println("Recipes:");
+                recipeReader();
+            } else {
+                break;
+            }
+        }
+
     }
 
     public void addARecipe() {
         String recipeName = breakingIntoIndividualRecipes.get(0);
-        System.out.println("TEST: recipe name : " + recipeName);
+        // System.out.println("TEST: recipe name : " + recipeName);
         int recipeTime = Integer.valueOf(breakingIntoIndividualRecipes.get(1));
-        System.out.println("TEST: recipe time : " + recipeTime);
+        // System.out.println("TEST: recipe time : " + recipeTime);
 
         int howManyIngredients = (breakingIntoIndividualRecipes.size());
         ArrayList<String> ingredients = new ArrayList<>();
@@ -43,16 +55,16 @@ public class UserInterface {
         breakingIntoIndividualRecipes.clear();
     }
 
-    public void recipeReader() {
-        // skipping scanner for now
-        //  System.out.println("File to read:");
-        //  String input = scanner.nextLine();
-        String input = "recipes.txt";
+    public void fileReader() {
+        System.out.println("File to read:");
+        String input = scanner.nextLine();
+        // use below to skip scanner
+        //  String input = "recipes.txt";
 
         try ( Scanner fileScanner = new Scanner(Paths.get(input))) {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
-                System.out.println("line: " + line);
+                //      System.out.println("TEST: line: " + line);
                 allLinesReadFromFile.add(line);
             }
         } catch (Exception e) {
@@ -70,7 +82,7 @@ public class UserInterface {
                 breakingIntoIndividualRecipes.add(piece);
             }
         }
-
+        /*
         //TEST: what's in recipesReadFromFile after the try/ except?
         for (Recipe rcp : recipesReadFromFile) {
             System.out.println("TEST: recipes after TRY:" + rcp);
@@ -79,11 +91,16 @@ public class UserInterface {
         //TEST: checking to see what's left in breakingIntoIndividualRecipes
         //the lines of the last recipes are there,
         //just have to get them, make a recipe, and add to breakingIntoIndividualRecipes
+        
         for (String whatsLeft : breakingIntoIndividualRecipes) {
             System.out.println("Whats: left: " + whatsLeft);
         }
+         */
         addARecipe();
 
+    }
+
+    public void recipeReader() {
         for (Recipe recipeList : recipesReadFromFile) {
             System.out.println(recipeList);
         }
