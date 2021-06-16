@@ -15,20 +15,35 @@ import java.util.Scanner;
 public class UserInterface {
 
     private Scanner scanner;
-    // private ArrayList<Recipe> recipesReadFromFile;
     ArrayList<String> allLinesReadFromFile = new ArrayList<>();
     ArrayList<String> breakingIntoIndividualRecipes = new ArrayList<>();
-    // going to try and make this a private 
     ArrayList<Recipe> recipesReadFromFile = new ArrayList<>();
 
-    // private ArrayList<String> allLinesReadFromFile;
     public UserInterface(Scanner scanner) {
         this.scanner = scanner;
-        // this.fileScanner = fileScanner;
     }
 
     public void start() {
+        recipeReader();
+    }
 
+    public void addARecipe() {
+        String recipeName = breakingIntoIndividualRecipes.get(0);
+        System.out.println("TEST: recipe name : " + recipeName);
+        int recipeTime = Integer.valueOf(breakingIntoIndividualRecipes.get(1));
+        System.out.println("TEST: recipe time : " + recipeTime);
+
+        int howManyIngredients = (breakingIntoIndividualRecipes.size());
+        ArrayList<String> ingredients = new ArrayList<>();
+        for (int i = 2; i < breakingIntoIndividualRecipes.size(); i++) {
+            ingredients.add(breakingIntoIndividualRecipes.get(i));
+        }
+        Recipe recipe = new Recipe(recipeName, recipeTime, ingredients);
+        recipesReadFromFile.add(recipe);
+        breakingIntoIndividualRecipes.clear();
+    }
+
+    public void recipeReader() {
         // skipping scanner for now
         //  System.out.println("File to read:");
         //  String input = scanner.nextLine();
@@ -68,26 +83,9 @@ public class UserInterface {
             System.out.println("Whats: left: " + whatsLeft);
         }
         addARecipe();
- 
+
         for (Recipe recipeList : recipesReadFromFile) {
             System.out.println(recipeList);
         }
-
-    }
-
-    public void addARecipe() {
-        String recipeName = breakingIntoIndividualRecipes.get(0);
-        System.out.println("TEST: recipe name : " + recipeName);
-        int recipeTime = Integer.valueOf(breakingIntoIndividualRecipes.get(1));
-        System.out.println("TEST: recipe time : " + recipeTime);
-
-        int howManyIngredients = (breakingIntoIndividualRecipes.size());
-        ArrayList<String> ingredients = new ArrayList<>();
-        for (int i = 2; i < breakingIntoIndividualRecipes.size(); i++) {
-            ingredients.add(breakingIntoIndividualRecipes.get(i));
-        }
-        Recipe recipe = new Recipe(recipeName, recipeTime, ingredients);
-        recipesReadFromFile.add(recipe);
-        breakingIntoIndividualRecipes.clear();
     }
 }
